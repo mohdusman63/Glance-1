@@ -1,0 +1,23 @@
+1->select max(salary) from employee
+2->select name,salary from employee where salary=(select max(salary) from employee)
+3->select name,salary from employee where salary!=(select max(salary) from employee)
+4->select name,salary from employee where salary<>(select max(salary) from employee)
+5->select name,id from employee where 
+salary=(select max(salary) from employee where salary<>(select max(salary) from employee))
+  1-->find max then print all except max again find max 
+6->select deptt ,count(deptt) from  employee group by deptt  
+or
+select depp ,count(*) from  employee group by deptt  
+
+duplicate
+7->select deptt from  employee group by deptt having count(*) >2
+select ename from employee where deptt in
+(select deptt from  employee group by deptt having count(*) >2)
+8->update salary set sex = IF (sex = "m", "f", "m"); (swap salary)
+or
+UPDATE salary
+SET
+    sex = CASE sex
+        WHEN 'm' THEN 'f'
+        ELSE 'm'
+    END;
