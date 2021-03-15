@@ -9,3 +9,10 @@
        "as": "output"
     }}
  ])
+
+  or
+  db.demo396.aggregate([
+    {$unwind:"$product"},
+       {lookup:{from :" ",locaiField:"product" ,foreignField:"",as:""}}
+    }}
+ ])
