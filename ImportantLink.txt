@@ -5,3 +5,7 @@ https://undraw.co/illustrations
 react three dot
 https://stackoverflow.com/questions/60123638/use-three-dots-span-to-trigger-dropdown
 https://codesandbox.io/s/custom-toggle-react-bootstrap-6iehc?file=/src/App.js
+
+
+//custom toggle
+https://medium.com/@kevinfelisilda/click-outside-element-event-using-react-hooks-2c540814b661
