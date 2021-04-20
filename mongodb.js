@@ -65,4 +65,11 @@ db.getCollection('companies').updateOne({ poster_id:ObjectId('6078181304f20b301c
    { $set: {"location.$[].is_default" : false} }
 
   )
+
+//how to get nested data
+db.getCollection('companies').find({'poster_id': ObjectId("6078181304f20b301ce6401b"),
+    'founder_team._id':ObjectId('607d65bd10a1571164438e85')},
+    {'founder_team.$': 1 , '_id':0}
+
+)
 		
