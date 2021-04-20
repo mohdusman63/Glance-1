@@ -58,4 +58,11 @@
                 }
             },
         ])
+
+
+update all field like is_default:0
+db.getCollection('companies').updateOne({ poster_id:ObjectId('6078181304f20b301ce6401b')},
+   { $set: {"location.$[].is_default" : false} }
+
+  )
 		
