@@ -111,3 +111,14 @@ db.getCollection('companies').find({'poster_id': ObjectId("6078181304f20b301ce64
             },
           }
         );
+
+//insert many element 
+             data.map((element) => {
+                    let insertData = {}
+                    count++
+                    insertData.service_type = element.service_type
+                    insertData.elapsed_time = element.elapsed_time ? element.elapsed_time : null
+                    arr.push(insertData)
+               })
+           // console.log(arr)
+            CancellationRuleModel.insertMany(arr)
