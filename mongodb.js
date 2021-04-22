@@ -72,4 +72,42 @@ db.getCollection('companies').find({'poster_id': ObjectId("6078181304f20b301ce64
     {'founder_team.$': 1 , '_id':0}
 
 )
-		
+
+//how to update nested object
+ ScoreCard.updateOne(
+        { match_id: req.body.match_id },
+        {
+          $push: {
+            batsman: {
+              player_id: req.body.player_id,
+              four: req.body.four,
+              six: req.body.six,
+              played_ball: req.body.played_ball,
+            },
+          },
+        }
+      )
+
+//to check nested element exist 
+ let get = await ScoreCard.findOne(
+        { match_id: req.body.match_id },
+        {
+          batsman: {
+            $elemMatch: {
+              player_id: mongoose.Types.ObjectId(req.body.player_id),
+            },
+          },
+        }
+      );
+
+//delete nested object
+   let u = await ScoreCard.updateOne(
+          { match_id: req.body.match_id },
+          {
+            $pull: {
+              batsman: {
+                player_id: req.body.player_id,
+              },
+            },
+          }
+        );
