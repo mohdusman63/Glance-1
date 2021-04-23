@@ -19,3 +19,5 @@ https://styled-components.com/docs/basics#getting-started
 
 //file upload
 https://levelup.gitconnected.com/file-upload-express-mongodb-multer-s3-7fad4dfb3789
+// s3 multer
+https://stackoverflow.com/questions/44028876/how-to-specify-upload-directory-in-multer-s3-for-aws-s3-bucket/44029666
