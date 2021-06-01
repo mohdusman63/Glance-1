@@ -122,3 +122,46 @@ db.getCollection('companies').find({'poster_id': ObjectId("6078181304f20b301ce64
                })
            // console.log(arr)
             CancellationRuleModel.insertMany(arr)
+
+
+await PostJobModel.aggregate([
+                    {$match: searchCriteria},
+                    {
+                        $group: {
+                            _id: '$_id',
+                            'jobs': {'$push': '$$ROOT'}
+                        }
+                    },
+
+                    {
+                        $lookup: {
+                            from: 'companies',
+                            localField: 'jobs.company_id',
+                            foreignField: '_id',
+                            as: 'company_details'
+                        }
+                    },
+                    {$match: company_filter},
+                    {
+                        $lookup: {
+                            from: 'job_locations',
+                            localField: '_id',
+                            foreignField: 'job_id',
+                            as: 'address_details'
+                        }
+                    },
+                    {
+                        $project: {
+                            _id: 0,
+                            jobs: 1,
+                            address_details: '$address_details',
+                            company_details: '$company_details'
+
+                        }
+                    },
+                    {$sort: {created_at: -1}},
+                    {$skip: skip},
+                    {$limit: resPerPage},
+
+
+                ])
