@@ -94,3 +94,39 @@ answer.map((val)=>{
   console.log(val)
 })
 console.log('------------->>>>>')
+
+
+
+
+
+
+
+https://stackoverflow.com/questions/52708918/aggregation-lookup-with-let-is-not-working
+
+
+
+
+db.getCollection('questions').aggregate([
+   {$match:{"_id" : ObjectId("6083db27ddf32d4c98c6c9f5")}},
+   {$lookup:{from:'attempted_questions',localField:'_id',foreignField:'question_id',as:'question'}},
+   {$unwind:'$question'},
+   {$group:{
+       _id:'$question.question_id',
+       count:{$sum:1},
+       items: {
+        $addToSet:{
+            title:'$title',
+            priority :'$priority',
+            image:'$image',
+            answers:'$answers',
+            }},
+       
+       }},
+       
+       {$project:{
+           count:1,
+           items:'$items'
+           
+           
+           }}
+])
