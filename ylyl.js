@@ -130,3 +130,56 @@ db.getCollection('questions').aggregate([
            
            }}
 ])
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+db.getCollection('questions').aggregate([
+     {$match:{ "_id" : ObjectId("6083db27ddf32d4c98c6c9f5")}},
+     {$lookup:{from:'attempted_questions',localField:'_id',foreignField:'question_id',as:'details'}},
+     {$unwind:'$details'},
+     {$group:{
+         _id:'$details.amswer_id',
+         count:{$sum:1},
+         original:{$addToSet:{count:'$count',title:'$title',image:'$image',priority:'$priority',answers:'$answers'}},
+         docs:{$push:'$details'}
+       }},
+       {$project:{
+           count:1,
+           details1:'$docs',
+           original:'$original',
+        }},
+        {$unwind:'$details1'},
+        {
+            $group:{
+                _id:'$details1.answer_id',
+                number:{$sum:1},
+                d:{$addToSet:{count:'$count',original:'$original'}},
+                allDocs:{$push:'$$ROOT'}
+                
+  }
+            
+            },
+            
+         
+])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
